@@ -1,0 +1,16 @@
+﻿<li class="chat-message">
+    <span class="timestamp">@TimeStamp.ToString("HH:mm:ss")</span> -
+    <strong>@Name</strong>: @Message
+</li>
+
+@code {
+    [Parameter]
+    public string Name { get; set; }
+
+    [Parameter]
+    public string Message { get; set; }
+
+    [Parameter]
+    public DateTime TimeStamp { get; set; }
+}
+

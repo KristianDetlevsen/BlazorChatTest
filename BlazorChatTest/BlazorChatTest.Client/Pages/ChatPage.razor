@@ -1,0 +1,47 @@
+﻿@using BlazorChatTest.Client.Pages.Components
+@using BlazorChatTest.Client.Services
+@using Shared
+@page "/chat"
+@rendermode @(new InteractiveAutoRenderMode(false))
+@inject IChatService ChatService
+
+<h3>Simple Chat</h3>
+
+<div>
+    <label>Name:</label>
+    <input @bind="newName" />
+</div>
+
+<div>
+    <label>Message:</label>
+    <input @bind="newMessage" />
+</div>
+
+<button @onclick="SendMessage">Send</button>
+
+<hr />
+
+<ul>
+    @foreach (var chat in chatMessages)
+    {
+        <ChatMessage Name="@chat.Name" Message="@chat.Message" TimeStamp="@chat.TimeStamp" />
+    }
+</ul>
+
+@code {
+    private List<Shared.ChatMessage> chatMessages = new List<Shared.ChatMessage>();
+    private string newName;
+    private string newMessage;
+
+    private void SendMessage()
+    {
+        var message = new Shared.ChatMessage
+        {
+            Name = newName,
+            Message = newMessage,
+            TimeStamp = DateTime.Now
+        };
+
+        var response = ChatService.GetChatMessages();
+    }
+}
