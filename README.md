@@ -1,6 +1,6 @@
 # Simpel chatfunktion i Blazor 💬
 
-> Projekt udviklet som en del af undervisningen på 2. semester.  
+> Projekt udviklet som en del af undervisningen på 3. semester.  
 > Opdateret kort i september 2025 med manglende push til main samt README.
 
 ## Om projektet
