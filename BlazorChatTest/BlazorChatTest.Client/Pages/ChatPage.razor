@@ -29,7 +29,8 @@
 </ul>
 
 @code {
-    private List<Shared.ChatMessage> chatMessages = new List<Shared.ChatMessage>();
+    // private List<Shared.ChatMessage> chatMessages = new List<Shared.ChatMessage>();
+    private Shared.ChatMessage[] chatMessages = [];
     private string newName;
     private string newMessage;
 
@@ -42,6 +43,26 @@
             TimeStamp = DateTime.Now
         };
 
-        var response = ChatService.GetChatMessages();
+        ChatService.PostChatMessage(message);
     }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadMessagesPeriodically();
+    }
+
+    private async Task LoadMessagesAsync()
+    {
+        chatMessages = await ChatService.GetChatMessages();
+    }
+
+    private async Task LoadMessagesPeriodically() 
+    {
+        while (true)
+        {
+            await LoadMessagesAsync();
+            await InvokeAsync(StateHasChanged);
+            await Task.Delay(5000);
+        }
+    }    
 }

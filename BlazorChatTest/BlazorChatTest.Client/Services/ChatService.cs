@@ -14,15 +14,14 @@ namespace BlazorChatTest.Client.Services
             _httpClient = httpClient;
         }
 
-        public async Task GetChatMessages(Shared.ChatMessage message)
-        {
-            await _httpClient.PostAsJsonAsync("api/chat", message);
-        }
-
         public async Task<Shared.ChatMessage[]> GetChatMessages()
         {
-            var response = await _httpClient.GetFromJsonAsync<Shared.ChatMessage[]>("api/chat");
-            return response;
+            return await _httpClient.GetFromJsonAsync<Shared.ChatMessage[]>("api/chat");
+        }
+
+        public async Task PostChatMessage(Shared.ChatMessage message)
+        {
+            await _httpClient.PostAsJsonAsync("api/chat", message);
         }
     }
 }

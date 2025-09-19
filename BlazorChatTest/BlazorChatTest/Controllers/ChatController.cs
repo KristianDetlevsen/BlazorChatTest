@@ -17,8 +17,6 @@ namespace BlazorChatTest.Controllers
             this.chatService = chatService;
         }
 
-        private static List<ChatMessage> messages = new List<ChatMessage>();
-
         [HttpGet]
         public async Task<ActionResult<ChatMessage[]>> GetMessages()
         {
@@ -27,10 +25,10 @@ namespace BlazorChatTest.Controllers
         }
 
         [HttpPost]
-        public IActionResult PostMessage(ChatMessage message)
+        public async Task<ActionResult> PostMessage(ChatMessage message)
         {
             message.TimeStamp = DateTime.Now;
-            messages.Add(message);
+            await chatService.PostChatMessage(message);
             return Ok();
         }
     }

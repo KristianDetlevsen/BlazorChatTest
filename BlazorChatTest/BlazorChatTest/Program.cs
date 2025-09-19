@@ -45,7 +45,7 @@ namespace BlazorChatTest
 
             builder.Services.AddSingleton<IEmailSender<ApplicationUser>, IdentityNoOpEmailSender>();
 
-            builder.Services.AddScoped<IChatService, ChatService>();
+            builder.Services.AddScoped<IChatService, BlazorChatTest.Services.ChatService>();
 
             builder.Services.AddControllers();
 

@@ -8,15 +8,17 @@ namespace BlazorChatTest.Services
 {
     public class ChatService : IChatService
     {
+        private readonly List<Shared.ChatMessage> messages = [];
+        
         public async Task<Shared.ChatMessage[]> GetChatMessages()
         {
-            List<ChatMessage> messages = [];
-            messages.Add(new ChatMessage { Message = "Hej", Name = "Bob", TimeStamp=DateTime.Now});
-            messages.Add(new ChatMessage { Message = "Hej", Name = "Bob", TimeStamp = DateTime.Now });
-            messages.Add(new ChatMessage { Message = "Hej", Name = "Bob", TimeStamp = DateTime.Now });
-            messages.Add(new ChatMessage { Message = "Hej", Name = "Bob", TimeStamp = DateTime.Now });
-            messages.Add(new ChatMessage { Message = "Hej", Name = "Bob", TimeStamp = DateTime.Now });
-            return messages.ToArray();
+            return await Task.FromResult(messages.ToArray());
+        }
+
+        public Task PostChatMessage(ChatMessage message)
+        {
+            messages.Add(message);
+            return Task.CompletedTask;
         }
     }
 }
